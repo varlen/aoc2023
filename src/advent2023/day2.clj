@@ -53,14 +53,52 @@
       (filter (partial impossible-draw? criteria))
       empty?))
 
+(defn games
+  [input]
+  (->> input
+       str/split-lines
+       (map line->game)))
+
 (defn possible-games
   [input criteria]
   (->> input
-      str/split-lines
-      (map line->game)
+      games
       (filter (partial possible-game? criteria))
       (mapv :game)))
 
 (defn possible-games-id-sum
   [input]
   (reduce + (possible-games input {:red 12 :green 13 :blue 14})))
+
+; 2B
+
+(defn minimum-possible-amount-of-color
+  [game color]
+  (->> game :draws (mapv #(get % color 0)) (apply max)))
+
+(defn minimum-possible-set
+  [game]
+  (->> [:red :green :blue]
+       ((juxt
+          identity
+          #(mapv (partial minimum-possible-amount-of-color game) %)))
+       (apply zipmap)))
+
+(defn remove-zeros-from-map
+  [m]
+  (into {} (filter (fn [[_ value]] (< 0 value)) m)))
+
+(defn power
+  [cube-set]
+  (->> cube-set
+       remove-zeros-from-map
+       ((juxt :red :green :blue))
+       (apply *)))
+
+(defn minimum-set-power-sum
+  [input]
+  (->> input
+       games
+       (map minimum-possible-set)
+       (map power)
+       (reduce +)))

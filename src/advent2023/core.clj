@@ -18,3 +18,6 @@
 
 (print "Day 2a:")
 (println (->> 2 get-input day2/possible-games-id-sum))
+
+(print "Day 2b:")
+(println (-> 2 get-input advent2023.day2/minimum-set-power-sum))
