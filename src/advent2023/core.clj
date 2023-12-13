@@ -1,7 +1,9 @@
 (ns advent2023.core
   (:require [advent2023.day1 :as day1]
             [advent2023.day2 :as day2]
-            [clojure.java.io :as jio]))
+            [advent2023.day3 :as day3]
+            [clojure.java.io :as jio]
+            [clojure.string :as str]))
 
 (defn get-input
   [day]
@@ -21,3 +23,13 @@
 
 (print "Day 2b:")
 (println (-> 2 get-input advent2023.day2/minimum-set-power-sum))
+
+(print "Day 3a:")
+(->> 3
+     get-input
+     (advent2023.day3/first-challenge))
+
+(print "Day 3b:")
+(->> 3
+     get-input
+     (advent2023.day3/second-challenge))
