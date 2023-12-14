@@ -25,11 +25,13 @@
 (println (-> 2 get-input advent2023.day2/minimum-set-power-sum))
 
 (print "Day 3a:")
-(->> 3
-     get-input
-     (advent2023.day3/first-challenge))
+(println
+  (->> 3
+       get-input
+       (advent2023.day3/first-challenge)))
 
 (print "Day 3b:")
-(->> 3
-     get-input
-     (advent2023.day3/second-challenge))
+(println
+  (->> 3
+       get-input
+       (advent2023.day3/second-challenge)))
