@@ -13,7 +13,8 @@
                            (- duration hold-time-aka-speed)
                            ; actual speed
                            hold-time-aka-speed)}))
-       (filter #(< world-record-distance (:distance %)))))
+       (filter #(< world-record-distance (:distance %)))
+       count))
 
 (defn first-challenge
   []
@@ -22,7 +23,6 @@
      (race-wins 93 1192)
      (race-wins 84 1019)
      (race-wins 66 1063)]
-    (map count)
     (apply *)))
 
 (defn race-wins-lighter
@@ -42,3 +42,12 @@
   (race-wins-lighter
     48938466
     261119210191063))
+
+; If you are curious on the difference (which isn't much) between both approaches:
+(comment
+  (time (race-wins 48938466 261119210191063))
+  (time (race-wins-lighter 48938466 261119210191063)))
+;"Elapsed time: 7190.9083 msecs"
+;=> 36749103
+;"Elapsed time: 5640.493201 msecs"
+;=> 36749103
